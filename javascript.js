@@ -1,18 +1,21 @@
 
-var text_line = "";
+var answer_sequence = "";
+var result = "";
+
 function pressButton(){
     const buttons = document.querySelectorAll('.btn');
-    buttons.forEach(button => button.addEventListener('click', screen));
+    buttons.forEach(button => button.addEventListener('click',printToScreen));
 }
 
-function screen(e){
-    const text = document.querySelector('.text');
-    text_line += e.target.textContent;
-    text.innerHTML = `${text_line}`;
+function printToScreen(e){
+    const answer = document.querySelector('.answer');
+    if(answer_sequence.length < 16 && (e.target.textContent !== '='
+                                      && e.target.textContent !== 'AC'
+                                      && e.target.textContent !== '+/-'
+                                      && e.target.textContent !== '%')){
+    answer_sequence += e.target.textContent;
+    }
+    answer.textContent = answer_sequence;
 }
-function start(){
-    pressButton();
 
-}
-
-start();
+pressButton();
